@@ -2,18 +2,15 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9F1D284B-7BBB-40A4-BD28-A04DDF6D0616}</ProjectGuid>
+    <ProjectGuid>{97E5B58C-2366-4965-86E8-40C886E35913}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Netstats</RootNamespace>
     <AssemblyName>Netstats</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,35 +30,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Core\" />
+    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.9.9\lib\net45\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Network\DescriptorForAttribute.cs" />
+    <Compile Include="Network\Descriptors.cs" />
+    <Compile Include="Network\Extensions.cs" />
     <Compile Include="Network\GenericPage.cs" />
-    <Compile Include="Network\IPage.cs" />
-    <Compile Include="Network\Extras\Extensions.cs" />
     <Compile Include="Network\INetworkApi.cs" />
+    <Compile Include="Network\IPage.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
     <Compile Include="Network\LoginResult.cs" />
+    <Compile Include="Network\Mixins\IHtmlCollectionMixins.cs" />
+    <Compile Include="Network\Mixins\IHtmlDoucmenMixins.cs" />
+    <Compile Include="Network\Mixins\IPageMixins.cs" />
     <Compile Include="Network\NetworkApi.cs" />
     <Compile Include="Network\PageDescriptorFactory.cs" />
     <Compile Include="Network\PageType.cs" />
-    <Compile Include="Network\Descriptors\AuthenticationFailedPageDescriptor.cs" />
-    <Compile Include="Network\Descriptors\BandwidthExceededPageDescriptor.cs" />
-    <Compile Include="Network\Descriptors\ConfirmActionPageDescriptor.cs" />
-    <Compile Include="Network\Descriptors\LoggedOutPageDescriptor.cs" />
-    <Compile Include="Network\Descriptors\MaxUserSessionsReachedPageDescriptor.cs" />
-    <Compile Include="Network\Descriptors\SessionPageDescriptor.cs" />
     <Compile Include="Network\UserQuotaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\packages\AngleSharp.0.9.9\lib\portable-windows8+net45+windowsphone8+wpa+monoandroid+monotouch\AngleSharp.dll</HintPath>
-    </Reference>
+    <Folder Include="Core\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Netstats\Netstats.csproj">
-      <Project>{9f1d284b-7bbb-40a4-bd28-a04ddf6d0616}</Project>
+      <Project>{97E5B58C-2366-4965-86E8-40C886E35913}</Project>
       <Name>Netstats</Name>
     </ProjectReference>
   </ItemGroup>
