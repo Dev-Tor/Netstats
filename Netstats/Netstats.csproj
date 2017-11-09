@@ -37,22 +37,23 @@
     <Folder Include="Core\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPage.cs" />
+    <Compile Include="Network\GenericPage.cs" />
+    <Compile Include="Network\IPage.cs" />
     <Compile Include="Network\Extras\Extensions.cs" />
     <Compile Include="Network\INetworkApi.cs" />
-    <Compile Include="Network\IProxyDescriptor.cs" />
+    <Compile Include="Network\IPageDescriptor.cs" />
     <Compile Include="Network\LoginResult.cs" />
     <Compile Include="Network\NetworkApi.cs" />
+    <Compile Include="Network\PageDescriptorFactory.cs" />
     <Compile Include="Network\PageType.cs" />
-    <Compile Include="Network\Proxy\Descriptors\AuthenticationFailedPageDescriptor.cs" />
-    <Compile Include="Network\Proxy\Descriptors\BandwidthExceededPageDescriptor.cs" />
-    <Compile Include="Network\Proxy\Descriptors\ConfirmActionPageDescriptor.cs" />
-    <Compile Include="Network\Proxy\Descriptors\LoggedOutPageDescriptor.cs" />
-    <Compile Include="Network\Proxy\Descriptors\MaxUserSessionsReachedPageDescriptor.cs" />
-    <Compile Include="Network\Proxy\Descriptors\SessionPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\AuthenticationFailedPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\BandwidthExceededPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\ConfirmActionPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\LoggedOutPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\MaxUserSessionsReachedPageDescriptor.cs" />
+    <Compile Include="Network\Descriptors\SessionPageDescriptor.cs" />
     <Compile Include="Network\UserQuotaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Network\Proxy\DescriptorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

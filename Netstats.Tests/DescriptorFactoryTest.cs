@@ -20,9 +20,9 @@ namespace Netstats.Tests
         [TestCase(PageType.LoggedOut, typeof(LoggedOutPageDescriptor))]
         [TestCase(PageType.MaxUserSessionsReached, typeof(MaxUserSessionsReachedPageDescriptor))]
         [TestCase(PageType.Session, typeof(SessionPageDescriptor))]
-        public void GetDescriptor_WhenCalledValidPageType_CreatesAppropriateDescriptor(PageType type, Type descriptorType)
+        public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type, Type descriptorType)
         {
-            DescriptorFactory factory = new DescriptorFactory();
+            PageDescriptorFactory factory = new PageDescriptorFactory();
             var descriptor = factory.GetDesciptor(type);
             var expected = descriptor.GetType(); 
 
@@ -32,7 +32,7 @@ namespace Netstats.Tests
         [Test]
         public void GetDescriptor_WhenCalledWithUnknwonPageType_ThrowsInvavlidOperationException()
         {
-            DescriptorFactory factory = new DescriptorFactory();
+            PageDescriptorFactory factory = new PageDescriptorFactory();
 
             Assert.Throws<InvalidOperationException>(() => factory.GetDesciptor(PageType.Unknown));
         }

@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Netstats.Network.Proxy.Descriptors
 {
-    public class MaxUserSessionsReachedPageDescriptor : IProxyDescriptor
+    public class MaxUserSessionsReachedPageDescriptor : IPageDescriptor
     {
         static string descriptorMark = "The no of UserSense session of User:";
 
-        public bool IsMatch(IHtmlDocument page)
+        public bool IsMatch(IPage page)
         {
-            return page.GetAllElements("p")
+            return page.Content.GetAllElements("p")
                        .GetElementsWithContent(descriptorMark, matchExact: false)
                        .Any();
         }

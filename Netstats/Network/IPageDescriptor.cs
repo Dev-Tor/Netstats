@@ -15,8 +15,8 @@ namespace Netstats.Network
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    public interface IProxyDescriptor
+    public interface IPageDescriptor
     {
-        bool IsMatch(IHtmlDocument document);
+        bool IsMatch(IPage document);
     }
 }

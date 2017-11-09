@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Netstats.Network.Proxy.Descriptors
 {
-    public class LoggedOutPageDescriptor : IProxyDescriptor
+    public class LoggedOutPageDescriptor : IPageDescriptor
     {
         static string descriptorMark = "You have been successfully Logged Out!!!";
 
-        public bool IsMatch(IHtmlDocument page)
+        public bool IsMatch(IPage page)
         {
-            return page.GetAllElements("p")
+            return page.Content.GetAllElements("p")
                        .GetElementsWithContent(descriptorMark, matchExact: false)
                        .Any();
         }

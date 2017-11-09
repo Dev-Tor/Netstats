@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,11 +24,6 @@ namespace Netstats.Network
         {
             HttpClient = new HttpClient();
             HttpClient.BaseAddress = new Uri("https://192.168.1.30");
-        }
-
-        public void MakeRequest(object p1, object p2, object cancelationToken)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<LoginResult> LoginAsync(string username, string password)

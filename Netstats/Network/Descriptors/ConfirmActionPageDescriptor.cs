@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Netstats.Network.Proxy.Descriptors
 {
-    public class ConfirmActionPageDescriptor : IProxyDescriptor
+    public class ConfirmActionPageDescriptor : IPageDescriptor
     {
-        public bool IsMatch(IHtmlDocument page)
+        public bool IsMatch(IPage page)
         {
-            return page.GetAllElements("form")
+            return page.Content.GetAllElements("form")
                        .GetElementsWithAttribute("name", "confirmaction", matchExact: true)
                        .Any();
         }

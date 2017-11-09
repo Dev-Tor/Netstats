@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Netstats.Network.Proxy.Descriptors
 {
-    public class SessionPageDescriptor : IProxyDescriptor
+    public class SessionPageDescriptor : IPageDescriptor
     {
         static string descriptorMark = "Note : If your browser is inactive for more than 23 Hours";
 
-        public bool IsMatch(IHtmlDocument page)
+        public bool IsMatch(IPage page)
         {
-            return page.GetAllElements("p")
+            return page.Content.GetAllElements("p")
                        .GetElementsWithContent(descriptorMark, matchExact: false)
                        .Any();
         }

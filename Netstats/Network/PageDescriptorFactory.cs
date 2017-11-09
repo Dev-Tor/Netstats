@@ -2,9 +2,9 @@
 
 namespace Netstats.Network.Proxy
 {
-    public class DescriptorFactory
+    public class PageDescriptorFactory
     {
-        public IProxyDescriptor GetDesciptor(PageType type)
+        public IPageDescriptor GetDesciptor(PageType type)
         {
             if (type == PageType.Unknown)
                 throw new InvalidOperationException("cannot craete parser for unknown type");
@@ -14,7 +14,7 @@ namespace Netstats.Network.Proxy
             try
             {
                 var descriptorType = Type.GetType("Netstats.Network.Proxy.Descriptors" + "." + descriptorName);
-                return (IProxyDescriptor)Activator.CreateInstance(descriptorType);
+                return (IPageDescriptor)Activator.CreateInstance(descriptorType);
             }
             catch(Exception ex)
             {

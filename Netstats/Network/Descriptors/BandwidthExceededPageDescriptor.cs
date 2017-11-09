@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Netstats.Network.Proxy.Descriptors
 {
-    public class AuthenticationFailedPageDescriptor : IProxyDescriptor
+    public class BandwidthExceededPageDescriptor : IPageDescriptor
     {
-        static string descriptorMark = "Authentication Failed";
+        static string descriptorMark = "Your Bandwidth quota is over";
 
-        public bool IsMatch(IHtmlDocument page)
+        public bool IsMatch(IPage page)
         {
-            return page.GetAllElements("p")
+            return page.Content.GetAllElements("p")
                        .GetElementsWithContent(descriptorMark, matchExact: false)
                        .Any();
         }
