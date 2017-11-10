@@ -10,14 +10,14 @@ namespace Netstats.Network
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    public class GenericPage : IPage
+    public class Page : IPage
     {
-        public GenericPage(IHtmlDocument content)
+        public Page(IHtmlDocument content)
         {
             Content = content;
         }
 
-        public GenericPage(PageType type, IHtmlDocument content)
+        public Page(PageType type, IHtmlDocument content)
         {
             Type = type;
             Content = content;
