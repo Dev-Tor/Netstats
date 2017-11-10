@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Network\DescriptorForAttribute.cs" />
     <Compile Include="Network\Descriptors.cs" />
-    <Compile Include="Network\Extensions.cs" />
     <Compile Include="Network\IHtmlDoucumentMixins.cs" />
     <Compile Include="Network\INetworkApi.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
