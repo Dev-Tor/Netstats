@@ -19,7 +19,7 @@ namespace Netstats.Network
             // Nothing to see here...
         }
 
-        public IPageDescriptor GetDesciptor(PageType type)
+        public IPageDescriptor GetDesciptorFor(PageType type)
         {
             if (type == PageType.Unknown)
                 throw new InvalidOperationException("cannot create descriptor for unknown type");
