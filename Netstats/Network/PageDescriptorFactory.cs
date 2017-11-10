@@ -22,12 +22,12 @@ namespace Netstats.Network
             foreach (var pageName in Enum.GetNames(typeof(PageType)).Where(x => x != "Unknown"))
             {
                 var pageType = (PageType)Enum.Parse(typeof(PageType), pageName);
-                var pageDescriptor = ConstructDescriptor(pageType);
+                var pageDescriptor = GetDescriptor(pageType);
                 pageDescriptorMap.Add(pageDescriptor);
             }
         }
 
-        private static IPageDescriptor ConstructDescriptor(PageType type)
+        private static IPageDescriptor GetDescriptor(PageType type)
         {
             if (type == PageType.Unknown)
                 throw new InvalidOperationException("cannot create descriptor for unknown type");
@@ -37,10 +37,9 @@ namespace Netstats.Network
                 // a DescriptorFor attribute
                 .Where(t =>t.IsClass && t.ImplementsInterface<IPageDescriptor>() && t.TypeHasAttribute<DescriptorForAttribute>(a => a.Type == type))
                 .FirstOrDefault();
-               
 
             if (descriptorType == null)
-                throw new Exception("Unable to find an appropriate descriptor");
+                throw new Exception("Unable to find an appropriate descriptor for type: {0}", type);
 
             return (IPageDescriptor)Activator.CreateInstance(descriptorType);
         }

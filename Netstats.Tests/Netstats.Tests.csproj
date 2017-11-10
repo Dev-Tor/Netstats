@@ -78,6 +78,13 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mocks\authFailedPage.html" />
+    <Content Include="Mocks\confirmationPage.html" />
+    <Content Include="Mocks\invalidRequestPage.html" />
+    <Content Include="Mocks\logoutPage.html" />
+    <Content Include="Mocks\sessionPage.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
