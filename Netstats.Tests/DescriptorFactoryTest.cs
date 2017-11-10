@@ -1,11 +1,10 @@
 ﻿using Netstats.Network;
-using NUnit.Framework;
 using System;
 using System.Linq;
+using Xunit;
 
 namespace Netstats.Tests
 {
-    [TestFixture]
     public class DescriptorFactoryTest
     {
         /// <summary>
@@ -14,13 +13,13 @@ namespace Netstats.Tests
         ///  is associated with
         /// </summary>
         /// <param name="type"> The page type</param>
-        [Test]
-        [TestCase(PageType.AuthenticationFailed)]
-        [TestCase(PageType.BandwidthExceeded)]
-        [TestCase(PageType.ConfirmAction)]
-        [TestCase(PageType.LoggedOut)]
-        [TestCase(PageType.MaxUserSessionsReached)]
-        [TestCase(PageType.Session)]
+        [Theory]
+        [InlineData(PageType.AuthenticationFailed)]
+        [InlineData(PageType.BandwidthExceeded)]
+        [InlineData(PageType.ConfirmAction)]
+        [InlineData(PageType.LoggedOut)]
+        [InlineData(PageType.MaxUserSessionsReached)]
+        [InlineData(PageType.Session)]
         public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
             PageDescriptorFactory factory = new PageDescriptorFactory();
@@ -31,10 +30,10 @@ namespace Netstats.Tests
                                                    .Select(x => (x as DescriptorForAttribute).Type)
                                                    .FirstOrDefault();
 
-            Assert.AreEqual(expectedType, type);
+            Assert.Equal(expectedType, type);
         }
 
-        [Test]
+        [Fact]
         public void GetDescriptor_WhenCalledWithUnknownPageType_ThrowsInvavlidOperationException()
         {
             PageDescriptorFactory factory = new PageDescriptorFactory();

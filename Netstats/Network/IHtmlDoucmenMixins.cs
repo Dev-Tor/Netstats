@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Netstats.Network.Mixins
+namespace Netstats.Network
 {
     public static class IHtmlDoucumentMixins
     {

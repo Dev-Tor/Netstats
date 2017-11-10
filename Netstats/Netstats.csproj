@@ -11,6 +11,8 @@
     <AssemblyName>Netstats</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,12 +53,13 @@
     <Compile Include="Network\IPage.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
     <Compile Include="Network\LoginResult.cs" />
-    <Compile Include="Network\Mixins\IHtmlCollectionMixins.cs" />
-    <Compile Include="Network\Mixins\IHtmlDoucmenMixins.cs" />
-    <Compile Include="Network\Mixins\IPageMixins.cs" />
+    <Compile Include="Network\IHtmlCollectionMixins.cs" />
+    <Compile Include="Network\IHtmlDoucmenMixins.cs" />
+    <Compile Include="Network\IPageMixins.cs" />
     <Compile Include="Network\NetworkApi.cs" />
     <Compile Include="Network\PageDescriptorFactory.cs" />
     <Compile Include="Network\PageType.cs" />
+    <Compile Include="Network\ReflectionMixins.cs" />
     <Compile Include="Network\UserQuotaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

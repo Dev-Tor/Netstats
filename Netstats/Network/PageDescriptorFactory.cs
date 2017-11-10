@@ -4,6 +4,14 @@ using System.Reflection;
 
 namespace Netstats.Network
 {
+    //===============================================================================
+    // Copyright © Edosa Kelvin. All rights reserved.
+    // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+    // OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+    // LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    // FITNESS FOR A PARTICULAR PURPOSE.
+    //===============================================================================
+
     public class PageDescriptorFactory
     {
         public PageDescriptorFactory()
@@ -17,16 +25,11 @@ namespace Netstats.Network
                 throw new InvalidOperationException("cannot create descriptor for unknown type");
 
             var descriptorType = Assembly.GetExecutingAssembly().GetTypes()
-                // Make sure it's a class that implements IPageDescriptor firstly
-                .Where(t => t.IsClass && t.GetInterface("IPageDescriptor") != null)
-                // Make sure it's decorated with a DescriptorFor attribute that corresponds to the requested page type
-                .Where(t =>
-                {
-                    return t.GetCustomAttributes(false)
-                            .Where(x => x is DescriptorForAttribute)
-                            .Select(x => (DescriptorForAttribute)x)
-                            .Any(x => x.Type == type);
-                }).FirstOrDefault();
+                // Descriptors should implement IPageDescriptor and should also be marked with 
+                // a DescriptorFor attribute which des
+                .Where(t => t.IsClass && t.ImplementsInterface<IPageDescriptor>() && t.TypeHasAttribute<DescriptorForAttribute>(a => a.Type == type))
+                .FirstOrDefault();
+               
 
             if (descriptorType == null)
                 throw new Exception("Unable to find an appropriate descriptor");
