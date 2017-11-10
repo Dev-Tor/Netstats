@@ -26,7 +26,7 @@ namespace Netstats.Network
 
             var descriptorType = Assembly.GetExecutingAssembly().GetTypes()
                 // Descriptors should implement IPageDescriptor and should also be marked with 
-                // a DescriptorFor attribute which des
+                // a DescriptorFor attribute
                 .Where(t => t.IsClass && t.ImplementsInterface<IPageDescriptor>() && t.TypeHasAttribute<DescriptorForAttribute>(a => a.Type == type))
                 .FirstOrDefault();
                
