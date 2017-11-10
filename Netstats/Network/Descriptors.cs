@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Netstats.Network.Mixins;
+using AngleSharp.Dom.Html;
 
 namespace Netstats.Network
 {
@@ -12,12 +9,12 @@ namespace Netstats.Network
         [DescriptorFor(PageType.AuthenticationFailed)]
         public class AuthenticationFailedDescriptor : IPageDescriptor
         {
-            static string descriptorMark = "Authentication Failed";
+            public PageType For => PageType.AuthenticationFailed;
 
-            public bool IsMatch(IPage page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("p")
-                           .GetElementsWithContent(descriptorMark, matchExact: false)
+                return pageContent.GetAllElements("p")
+                           .GetElementsWithContent("Authentication Failed", matchExact: false)
                            .Any();
             }
         }
@@ -25,12 +22,12 @@ namespace Netstats.Network
         [DescriptorFor(PageType.BandwidthExceeded)]
         public class BandwidthExceededDescriptor : IPageDescriptor
         {
-            static string descriptorMark = "Your Bandwidth quota is over";
+            public PageType For => PageType.BandwidthExceeded;
 
-            public bool IsMatch(IPage page)
+            public bool IsMatch(IHtmlDocument page)
             {
                 return page.GetAllElements("p")
-                           .GetElementsWithContent(descriptorMark, matchExact: false)
+                           .GetElementsWithContent("Your Bandwidth quota is over", matchExact: false)
                            .Any();
             }
         }
@@ -38,7 +35,9 @@ namespace Netstats.Network
         [DescriptorFor(PageType.ConfirmAction)]
         public class ConfirmActionDescriptor : IPageDescriptor
         {
-            public bool IsMatch(IPage page)
+            public PageType For => PageType.ConfirmAction;
+
+            public bool IsMatch(IHtmlDocument page)
             {
                 return page.GetAllElements("form")
                            .GetElementsWithAttribute("name", "confirmaction", matchExact: true)
@@ -48,13 +47,13 @@ namespace Netstats.Network
 
         [DescriptorFor(PageType.LoggedOut)]
         public class LoggedOutDescriptor : IPageDescriptor
-        {
-            static string descriptorMark = "You have been successfully Logged Out!!!";
+        { 
+            public PageType For => PageType.LoggedOut;
 
-            public bool IsMatch(IPage page)
+            public bool IsMatch(IHtmlDocument page)
             {
                 return page.GetAllElements("p")
-                           .GetElementsWithContent(descriptorMark, matchExact: false)
+                           .GetElementsWithContent("You have been successfully Logged Out!!!", matchExact: false)
                            .Any();
             }
         }
@@ -62,12 +61,12 @@ namespace Netstats.Network
         [DescriptorFor(PageType.MaxUserSessionsReached)]
         public class MaxUserSessionsReachedPageDescriptor : IPageDescriptor
         {
-            static string descriptorMark = "The no of UserSense session of User:";
+            public PageType For => PageType.MaxUserSessionsReached;
 
-            public bool IsMatch(IPage page)
+            public bool IsMatch(IHtmlDocument page)
             {
                 return page.GetAllElements("p")
-                           .GetElementsWithContent(descriptorMark, matchExact: false)
+                           .GetElementsWithContent("The no of UserSense session of User:", matchExact: false)
                            .Any();
             }
         }
@@ -75,12 +74,12 @@ namespace Netstats.Network
         [DescriptorFor(PageType.Session)]
         public class SessionPageDescriptor : IPageDescriptor
         {
-            static string descriptorMark = "Note : If your browser is inactive for more than 23 Hours";
+            public PageType For => PageType.Session;
 
-            public bool IsMatch(IPage page)
+            public bool IsMatch(IHtmlDocument page)
             {
                 return page.GetAllElements("p")
-                           .GetElementsWithContent(descriptorMark, matchExact: false)
+                           .GetElementsWithContent("Note : If your browser is inactive for more than 23 Hours", matchExact: false)
                            .Any();
             }
         }

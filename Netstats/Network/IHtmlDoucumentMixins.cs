@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 using System;
+using AngleSharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,7 @@ namespace Netstats.Network
                                                       .SelectMany(x => ((IElement)x.Parent).Children)
                                                       .Where(x => x.TextContent != value);
         }
+
+        public static IHtmlCollection<IElement> GetAllElements(this IHtmlDocument pageContent, string selectors = null) => pageContent.QuerySelectorAll(selectors);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -12,14 +13,21 @@ namespace Netstats.Network
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    public class PageDescriptorFactory
+    public static class PageDescriptorFactory
     {
-        public PageDescriptorFactory()
+        static List<IPageDescriptor> pageDescriptorMap = new List<IPageDescriptor>();
+
+        static PageDescriptorFactory()
         {
-            // Nothing to see here...
+            foreach (var pageName in Enum.GetNames(typeof(PageType)).Where(x => x != "Unknown"))
+            {
+                var pageType = (PageType)Enum.Parse(typeof(PageType), pageName);
+                var pageDescriptor = ConstructDescriptor(pageType);
+                pageDescriptorMap.Add(pageDescriptor);
+            }
         }
 
-        public IPageDescriptor GetDesciptorFor(PageType type)
+        private static IPageDescriptor ConstructDescriptor(PageType type)
         {
             if (type == PageType.Unknown)
                 throw new InvalidOperationException("cannot create descriptor for unknown type");
@@ -27,7 +35,7 @@ namespace Netstats.Network
             var descriptorType = Assembly.GetExecutingAssembly().GetTypes()
                 // Descriptors should implement IPageDescriptor and should also be marked with 
                 // a DescriptorFor attribute
-                .Where(t => t.IsClass && t.ImplementsInterface<IPageDescriptor>() && t.TypeHasAttribute<DescriptorForAttribute>(a => a.Type == type))
+                .Where(t =>t.IsClass && t.ImplementsInterface<IPageDescriptor>() && t.TypeHasAttribute<DescriptorForAttribute>(a => a.Type == type))
                 .FirstOrDefault();
                
 
@@ -36,5 +44,9 @@ namespace Netstats.Network
 
             return (IPageDescriptor)Activator.CreateInstance(descriptorType);
         }
+
+        public static IEnumerable<IPageDescriptor> GetAllDescriptors() => pageDescriptorMap;
+
+        public static IPageDescriptor GetDescriptorFor(PageType type) => pageDescriptorMap.First(x => x.For == type);
     }
 }

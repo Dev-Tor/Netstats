@@ -48,15 +48,14 @@
     <Compile Include="Network\DescriptorForAttribute.cs" />
     <Compile Include="Network\Descriptors.cs" />
     <Compile Include="Network\Extensions.cs" />
-    <Compile Include="Network\GenericPage.cs" />
+    <Compile Include="Network\IHtmlDoucumentMixins.cs" />
     <Compile Include="Network\INetworkApi.cs" />
     <Compile Include="Network\IPage.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
     <Compile Include="Network\LoginResult.cs" />
     <Compile Include="Network\IHtmlCollectionMixins.cs" />
-    <Compile Include="Network\IHtmlDoucmenMixins.cs" />
-    <Compile Include="Network\IPageMixins.cs" />
     <Compile Include="Network\NetworkApi.cs" />
+    <Compile Include="Network\Page.cs" />
     <Compile Include="Network\PageDescriptorFactory.cs" />
     <Compile Include="Network\PageType.cs" />
     <Compile Include="Network\ReflectionMixins.cs" />

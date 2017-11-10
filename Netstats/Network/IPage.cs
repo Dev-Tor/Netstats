@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Netstats.Network
 {
-    public interface IPage
-    {
-        IHtmlDocument Content { get; set; }
+    //public interface IPage
+    //{
+    //    IHtmlDocument Content { get; set; }
 
-        PageType Type { get; set; }
-    }
+    //    PageType Type { get; set; }
+    //}
 }

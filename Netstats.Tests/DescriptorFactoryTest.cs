@@ -22,8 +22,7 @@ namespace Netstats.Tests
         [InlineData(PageType.Session)]
         public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
-            PageDescriptorFactory factory = new PageDescriptorFactory();
-            var descriptor = factory.GetDesciptorFor(type);
+            var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
 
             var expectedType = descriptor.GetType().GetCustomAttributes(false)
                                                    .Where(x => x is DescriptorForAttribute)
@@ -36,9 +35,7 @@ namespace Netstats.Tests
         [Fact]
         public void GetDescriptor_WhenCalledWithUnknownPageType_ThrowsInvavlidOperationException()
         {
-            PageDescriptorFactory factory = new PageDescriptorFactory();
-
-            Assert.Throws<InvalidOperationException>(() => factory.GetDesciptorFor(PageType.Unknown));
+            Assert.Throws<InvalidOperationException>(() => PageDescriptorFactory.GetDescriptorFor(PageType.Unknown));
         }
     }
 }

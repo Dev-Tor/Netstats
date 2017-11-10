@@ -1,7 +1,11 @@
-﻿namespace Netstats.Network
+﻿using AngleSharp.Dom.Html;
+
+namespace Netstats.Network
 {
     public interface IPageDescriptor
     {
-        bool IsMatch(IPage page);
+        PageType For { get; }
+
+        bool IsMatch(IHtmlDocument pageContent);
     }
 }
