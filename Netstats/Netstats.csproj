@@ -50,7 +50,6 @@
     <Compile Include="Network\Extensions.cs" />
     <Compile Include="Network\IHtmlDoucumentMixins.cs" />
     <Compile Include="Network\INetworkApi.cs" />
-    <Compile Include="Network\IPage.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
     <Compile Include="Network\LoginResult.cs" />
     <Compile Include="Network\IHtmlCollectionMixins.cs" />
