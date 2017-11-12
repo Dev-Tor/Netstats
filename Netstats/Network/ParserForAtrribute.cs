@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Netstats.Network
 {
-    public class ParserForAtrribute : Attribute
+    public class ParserFor : Attribute
     {
         PageType For { get; }
 
-        public ParserForAtrribute(PageType pageType)
+        public ParserFor(PageType pageType)
         {
             For = pageType;
         }

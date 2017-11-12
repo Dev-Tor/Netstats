@@ -1,4 +1,5 @@
-﻿using Netstats.Network;
+﻿using Akavache;
+using Netstats.Network;
 using System;
 using System.Linq;
 using Xunit;

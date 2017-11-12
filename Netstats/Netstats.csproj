@@ -91,6 +91,7 @@
     <Compile Include="Network\IHtmlDoucumentMixins.cs" />
     <Compile Include="Network\INetworkApi.cs" />
     <Compile Include="Network\IPageDescriptor.cs" />
+    <Compile Include="Network\IPageParser.cs" />
     <Compile Include="Network\LoginResult.cs" />
     <Compile Include="Network\IHtmlCollectionMixins.cs" />
     <Compile Include="Network\NetworkApi.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Network\PageParserFactory.cs" />
     <Compile Include="Network\PageType.cs" />
     <Compile Include="Network\ParserForAtrribute.cs" />
+    <Compile Include="Network\Parsers.cs" />
     <Compile Include="Network\ReflectionMixins.cs" />
     <Compile Include="Network\UserQuotaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
