@@ -28,6 +28,6 @@ namespace Netstats.Network
 
         BandwidthExceeded,
 
-        MaxUserSessionsReached
+        MaxUserSessionsReached,
     }
 }

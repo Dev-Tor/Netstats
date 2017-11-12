@@ -14,20 +14,16 @@ namespace Netstats.Tests
         /// </summary>
         /// <param name="type"> The page type</param>
         [Theory]
-        [InlineData(PageType.AuthenticationFailed)]
-        [InlineData(PageType.BandwidthExceeded)]
-        [InlineData(PageType.ConfirmAction)]
-        [InlineData(PageType.LoggedOut)]
-        [InlineData(PageType.MaxUserSessionsReached)]
         [InlineData(PageType.Session)]
+        [InlineData(PageType.LoggedOut)]
+        [InlineData(PageType.ConfirmAction)]
+        [InlineData(PageType.BandwidthExceeded)]
+        [InlineData(PageType.AuthenticationFailed)]
+        [InlineData(PageType.MaxUserSessionsReached)]
         public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
             var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
-
-            var expectedType = descriptor.GetType().GetCustomAttributes(false)
-                                                   .Where(x => x is DescriptorForAttribute)
-                                                   .Select(x => (x as DescriptorForAttribute).Type)
-                                                   .FirstOrDefault();
+            var expectedType = descriptor.For;
 
             Assert.Equal(expectedType, type);
         }

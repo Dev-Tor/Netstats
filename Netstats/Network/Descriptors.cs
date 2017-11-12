@@ -13,6 +13,9 @@ namespace Netstats.Network
 
             public bool IsMatch(IHtmlDocument pageContent)
             {
+                if (pageContent == null)
+                    return false;
+
                 return pageContent.GetAllElements("p")
                            .GetElementsWithContent("Authentication Failed", matchExact: false)
                            .Any();
@@ -24,9 +27,12 @@ namespace Netstats.Network
         {
             public PageType For => PageType.BandwidthExceeded;
 
-            public bool IsMatch(IHtmlDocument page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("p")
+                if (pageContent == null)
+                    return false;
+
+                return pageContent.GetAllElements("p")
                            .GetElementsWithContent("Your Bandwidth quota is over", matchExact: false)
                            .Any();
             }
@@ -37,9 +43,12 @@ namespace Netstats.Network
         {
             public PageType For => PageType.ConfirmAction;
 
-            public bool IsMatch(IHtmlDocument page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("form")
+                if (pageContent == null)
+                    return false;
+
+                return pageContent.GetAllElements("form")
                            .GetElementsWithAttribute("name", "confirmaction", matchExact: true)
                            .Any();
             }
@@ -50,9 +59,12 @@ namespace Netstats.Network
         { 
             public PageType For => PageType.LoggedOut;
 
-            public bool IsMatch(IHtmlDocument page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("p")
+                if (pageContent == null)
+                    return false;
+
+                return pageContent.GetAllElements("p")
                            .GetElementsWithContent("You have been successfully Logged Out!!!", matchExact: false)
                            .Any();
             }
@@ -63,9 +75,12 @@ namespace Netstats.Network
         {
             public PageType For => PageType.MaxUserSessionsReached;
 
-            public bool IsMatch(IHtmlDocument page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("p")
+                if (pageContent == null)
+                    return false;
+
+                return pageContent.GetAllElements("p")
                            .GetElementsWithContent("The no of UserSense session of User:", matchExact: false)
                            .Any();
             }
@@ -76,9 +91,12 @@ namespace Netstats.Network
         {
             public PageType For => PageType.Session;
 
-            public bool IsMatch(IHtmlDocument page)
+            public bool IsMatch(IHtmlDocument pageContent)
             {
-                return page.GetAllElements("p")
+                if (pageContent == null)
+                    return false;
+
+                return pageContent.GetAllElements("p")
                            .GetElementsWithContent("Note : If your browser is inactive for more than 23 Hours", matchExact: false)
                            .Any();
             }

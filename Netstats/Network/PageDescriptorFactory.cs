@@ -39,7 +39,7 @@ namespace Netstats.Network
                 .FirstOrDefault();
 
             if (descriptorType == null)
-                throw new Exception("Unable to find an appropriate descriptor for type: {0}", type);
+                throw new Exception($"Unable to find an appropriate descriptor for type: {type}");
 
             return (IPageDescriptor)Activator.CreateInstance(descriptorType);
         }
