@@ -13,9 +13,9 @@ namespace Netstats.Network
 
     public interface INetworkApi
     {
-        Task<LoginResult> LoginAsync(string username, string password);
+        Task<string> LoginAsync(string username, string password);
 
-        //Task<LoginResult> Login(string username, string password, CancellationToken token, bool overrideCurrent = true);
+        //Task<string> Login(string username, string password, CancellationToken token, bool overrideCurrent = true);
 
         #region Unimplemented
 
