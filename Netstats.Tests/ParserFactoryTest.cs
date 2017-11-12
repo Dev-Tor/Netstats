@@ -1,12 +1,14 @@
-﻿using Akavache;
-using Netstats.Network;
+﻿using Netstats.Network;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Netstats.Tests
 {
-    public class DescriptorFactoryTest
+    public class ParserFactoryTest
     {
         /// <summary>
         ///  This test works on the basis that every page descriptor associated with a given <see cref="PageType"/> is
@@ -21,7 +23,7 @@ namespace Netstats.Tests
         [InlineData(PageType.BandwidthExceeded)]
         [InlineData(PageType.AuthenticationFailed)]
         [InlineData(PageType.MaxUserSessionsReached)]
-        public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
+        public void GetParser_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
             var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
             var expectedType = descriptor.For;
@@ -30,7 +32,7 @@ namespace Netstats.Tests
         }
 
         [Fact]
-        public void GetDescriptor_WhenCalledWithUnknownPageType_ReturnsNull()
+        public void GetParser_WhenCalledWithUnknownPageType_ReturnsNull()
         {
             Assert.Null(PageDescriptorFactory.GetDescriptorFor(PageType.Unknown));
         }

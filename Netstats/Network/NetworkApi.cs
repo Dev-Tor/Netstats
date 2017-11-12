@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AngleSharp.Parser.Html;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -18,27 +19,52 @@ namespace Netstats.Network
     {
         static readonly string requestUrl = "/cgi-bin/user_session.ggi";
 
-        static HttpClient HttpClient;
+        readonly HttpClient HttpClient;
+
+        readonly HtmlParser parser
 
         public NetworkApi()
         {
             HttpClient = new HttpClient();
             HttpClient.BaseAddress = new Uri("https://192.168.1.30");
+
+            parser = new HtmlParser(new HtmlParserOptions() { IsStrictMode = false });
         }
 
-        public async Task<LoginResult> LoginAsync(string username, string password)
+        IPageParserFactory ParserFactory { get; set; }
+
+        IPageDescriptorFactory DescriptorFactory { get; set; }
+
+        public Task<string> LoginAsync(string username, string password)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task<string> MakeRequest(IEnumerable<KeyValuePair<string, string>> data, CancellationToken cancelTtoken)
+        public virtual async Task<Page> MakeRequest(Dictionary<string, string> data, CancellationToken cancelTtoken)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             try
             {
                 var responseMsg = await HttpClient.PostAsync(requestUrl, new FormUrlEncodedContent(data), cancelTtoken);
-                return await responseMsg.Content.ReadAsStringAsync();
+                var response = await responseMsg.Content.ReadAsStringAsync();
+
+                var content = parser.Parse(response);
+
+                // Get descriptors for all page types except Unknown
+                foreach (var descriptor in  DescriptorFactory.GetAllDescriptors())
+                {
+                    if (descriptor.IsMatch(content))
+                    {
+                        var pageType = descriptor.For;
+                        return new Page(pageType, content);
+                    }
+                }
+
+                // This line may change in the future as i'm not sure whether to throw an exception or just 
+                // return a Page with PageType of Unknown
+                return new Page(PageType.Unknown, null);
+                return Page.Create(response);
             }
             catch (Exception ex)
             {

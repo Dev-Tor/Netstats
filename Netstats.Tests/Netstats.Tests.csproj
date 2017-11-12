@@ -88,6 +88,8 @@
     <Compile Include="DescriptorTests.cs" />
     <Compile Include="NetworkApiTest.cs" />
     <Compile Include="PageMockHelper.cs" />
+    <Compile Include="PageTests.cs" />
+    <Compile Include="ParserFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

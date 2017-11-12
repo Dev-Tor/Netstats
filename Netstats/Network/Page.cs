@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Dom.Html;
+using AngleSharp.Parser.Html;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,36 +14,35 @@ namespace Netstats.Network
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    public class Page 
+    public struct Page : IEquatable<Page>
     {
+        static HtmlParser parser = new HtmlParser();
+
         public Page(PageType type, IHtmlDocument content)
         {
             Type = type;
             Content = content;
         }
 
-        public PageType Type { get; set; }
+        public PageType Type { get; }
 
-        public IHtmlDocument Content { get; set; }
+        public IHtmlDocument Content { get; }
 
-        public static Page Create(IHtmlDocument content)
+        public bool Equals(Page other)
         {
-            if (content == null)
-                throw new ArgumentNullException(nameof(content));
-
-            // Get descriptors for all page types except Unknown
-            foreach (var descriptor in PageDescriptorFactory.GetAllDescriptors())
-            {
-                if (descriptor.IsMatch(content))
-                {
-                    var pageType = descriptor.For;
-                    return new Page(pageType, content);
-                }
-            }
-
-            // This line may change in the future as i'm not sure whether to throw an exception or just 
-            // return a Page with PageType of Unknown
-            return new Page(PageType.Unknown, content);
+            return Type == other.Type && Content == other.Content;
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals((Page)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return new { Type, Content }.GetHashCode();
+        }
+
+        public static Page Empty { get { return new Page(PageType.Unknown, null); } }
     }
 }

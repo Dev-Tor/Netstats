@@ -8,16 +8,16 @@
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    public struct LoginResult 
-    {
-        public string Token {  get; }
+    //public struct LoginResult 
+    //{
+    //    public string Token {  get; }
 
-        public UserQuotaType QuotaType { get; }
+    //    public UserQuotaType QuotaType { get; }
 
-        public LoginResult(string token, UserQuotaType quotaType)
-        {
-            this.Token = token;
-            this.QuotaType = quotaType;
-        }
-    }
+    //    public LoginResult(string token, UserQuotaType quotaType)
+    //    {
+    //        this.Token = token;
+    //        this.QuotaType = quotaType;
+    //    }
+    //}
 }
