@@ -37,6 +37,6 @@ namespace Netstats.Network
 
         public static IEnumerable<IPageParser> GetAllParsers() => pageParserMap;
 
-        public static IPageDescriptor GetDescriptorFor(PageType type) => pageParserMap.First(x => x.For == type);
+        public static IPageParser GetParserFor(PageType type) => pageParserMap.First(x => x.For == type);
     }
 }
