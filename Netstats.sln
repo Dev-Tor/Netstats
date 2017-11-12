@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netstats.Tests", "Netstats.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netstats", "Netstats\Netstats.csproj", "{97E5B58C-2366-4965-86E8-40C886E35913}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netstats.UI", "Netstats.UI\Netstats.UI.csproj", "{5BB2B669-0AEA-4D95-92DC-5615BC1846F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{97E5B58C-2366-4965-86E8-40C886E35913}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E5B58C-2366-4965-86E8-40C886E35913}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E5B58C-2366-4965-86E8-40C886E35913}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB2B669-0AEA-4D95-92DC-5615BC1846F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB2B669-0AEA-4D95-92DC-5615BC1846F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB2B669-0AEA-4D95-92DC-5615BC1846F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB2B669-0AEA-4D95-92DC-5615BC1846F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
