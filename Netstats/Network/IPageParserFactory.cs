@@ -1,6 +1,7 @@
 ﻿namespace Netstats.Network
 {
-    internal interface IPageParserFactory
+    public interface IPageParserFactory
     {
+        IPageParser GetParserFor(PageType type);
     }
 }

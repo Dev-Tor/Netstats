@@ -17,16 +17,12 @@ namespace Netstats.Network
 
         //Task<string> Login(string username, string password, CancellationToken token, bool overrideCurrent = true);
 
-        #region Unimplemented
-
-        //Task<string> GetCurrentUsage(string sessionId);
+        Task<string> GetUsage(string sessionId);
 
         //Task<string> GetCurrentUsage(string sessionId, CancellationToken token);
 
-        //Task Logout(string sessionId);
+        Task Logout(string sessionId);
 
         //Task Logout(string sessionId, CancellationToken token);
-
-        #endregion
     }
 }

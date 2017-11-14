@@ -1,4 +1,5 @@
 ﻿using Netstats.Network;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,17 @@ namespace Netstats.Tests
 {
     public class NetworkApiTest
     {
-        [Fact]
-        public void MakeRequest_WhenCalledWithNullData_ThrowsArgumentNullExceptionAsync()
+        [Fact(DisplayName = "Login_WhenCalled_CallsMake")]
+        public async Task Login_WhenCalled_ReturnsStringAsync()
         {
-            NetworkApi api = new NetworkApi();
-            Assert.Throws<AggregateException>(() => api.MakeRequest(null, CancellationToken.None).Wait());
+            string username = "john";
+            string password = "doe";
+            IRequestMaker mockRequestMaker = Substitute.For<IRequestMaker>();
+            mockRequestMaker.Make("/cgi-bin/user_session.ggi", Arg.Any<Dictionary<string, string>>(), PageType.Session)
+                            .Returns(Task.Run(() => "I'm fake"));
+            NetworkApi api = new NetworkApi(mockRequestMaker);
+            await api.LoginAsync(username, password);
+            await mockRequestMaker.Received().Make("/cgi-bin/user_session.ggi", Arg.Any<Dictionary<string, string>>(), PageType.Session);
         }
     }
 }

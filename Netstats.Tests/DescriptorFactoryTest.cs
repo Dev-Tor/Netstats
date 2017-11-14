@@ -1,7 +1,4 @@
-﻿using Akavache;
-using Netstats.Network;
-using System;
-using System.Linq;
+﻿using Netstats.Network;
 using Xunit;
 
 namespace Netstats.Tests
@@ -14,7 +11,7 @@ namespace Netstats.Tests
         ///  is associated with
         /// </summary>
         /// <param name="type"> The page type</param>
-        [Theory]
+        [Theory(DisplayName = "GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor")]
         [InlineData(PageType.Session)]
         [InlineData(PageType.LoggedOut)]
         [InlineData(PageType.ConfirmAction)]
@@ -23,16 +20,20 @@ namespace Netstats.Tests
         [InlineData(PageType.MaxUserSessionsReached)]
         public void GetDescriptor_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
-            var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
+            IPageDescriptorFactory factory = new PageDescriptorFactory();
+            var descriptor = factory.GetDescriptorFor(type);
             var expectedType = descriptor.For;
 
             Assert.Equal(expectedType, type);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetDescriptor_WhenCalledWithUnknownPageType_ReturnsNulls")]
         public void GetDescriptor_WhenCalledWithUnknownPageType_ReturnsNull()
         {
-            Assert.Null(PageDescriptorFactory.GetDescriptorFor(PageType.Unknown));
+            IPageDescriptorFactory factory = new PageDescriptorFactory();
+            var expected = factory.GetDescriptorFor(PageType.Unknown);
+
+            Assert.Null(expected);
         }
     }
 }

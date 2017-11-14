@@ -2,7 +2,7 @@
 
 namespace Netstats.Network
 {
-    internal interface IPageDescriptorFactory
+    public interface IPageDescriptorFactory
     {
         IEnumerable<IPageDescriptor> GetAllDescriptors();
 

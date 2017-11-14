@@ -44,6 +44,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reactiveui-core.7.4.0\lib\Net45\ReactiveUI.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.1.6.0\lib\Net45\Splat.dll</HintPath>
     </Reference>
@@ -86,6 +89,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
+    <Compile Include="Core\ISession.cs" />
+    <Compile Include="Core\ISessionManager.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\SessionFeed.cs" />
+    <Compile Include="Core\SessionManager.cs" />
+    <Compile Include="Management\UserAccount.cs" />
+    <Compile Include="Management\UserAccountManager.cs" />
+    <Compile Include="Management\UserAccountManagerMixins.cs" />
     <Compile Include="Network\DescriptorForAttribute.cs" />
     <Compile Include="Network\Descriptors.cs" />
     <Compile Include="Network\IHtmlDoucumentMixins.cs" />
@@ -94,7 +105,9 @@
     <Compile Include="Network\IPageDescriptorFactory.cs" />
     <Compile Include="Network\IPageParser.cs" />
     <Compile Include="Network\IPageParserFactory.cs" />
-    <Compile Include="Network\LoginResult.cs" />
+    <Compile Include="Network\IRequestMaker.cs" />
+    <Compile Include="Network\LoginFailedException.cs" />
+    <Compile Include="Network\LoginFailReason.cs" />
     <Compile Include="Network\IHtmlCollectionMixins.cs" />
     <Compile Include="Network\NetworkApi.cs" />
     <Compile Include="Network\Page.cs" />
@@ -104,12 +117,12 @@
     <Compile Include="Network\ParserForAtrribute.cs" />
     <Compile Include="Network\Parsers.cs" />
     <Compile Include="Network\ReflectionMixins.cs" />
-    <Compile Include="Network\UserQuotaType.cs" />
+    <Compile Include="Network\RequestFailedException.cs" />
+    <Compile Include="Network\RequestMaker.cs" />
+    <Compile Include="UserQuotaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

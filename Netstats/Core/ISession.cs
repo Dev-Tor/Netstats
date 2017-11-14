@@ -1,4 +1,6 @@
-﻿namespace Netstats.Network
+﻿using System;
+
+namespace Netstats.Core
 {
     //===============================================================================
     // Copyright © Edosa Kelvin. All rights reserved.
@@ -8,16 +10,10 @@
     // FITNESS FOR A PARTICULAR PURPOSE.
     //===============================================================================
 
-    //public struct LoginResult 
-    //{
-    //    public string Token {  get; }
+    public interface ISession : IDisposable
+    {
+        string Token { get; }
 
-    //    public UserQuotaType QuotaType { get; }
-
-    //    public LoginResult(string token, UserQuotaType quotaType)
-    //    {
-    //        this.Token = token;
-    //        this.QuotaType = quotaType;
-    //    }
-    //}
+        IObservable<SessionFeed> RefreshObservable { get; }
+    }
 }

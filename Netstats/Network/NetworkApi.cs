@@ -1,8 +1,9 @@
 ﻿using AngleSharp.Parser.Html;
+using Netstats.Core.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Netstats.Network
@@ -21,55 +22,73 @@ namespace Netstats.Network
 
         readonly HttpClient HttpClient;
 
-        readonly HtmlParser parser
+        readonly HtmlParser parser;
 
-        public NetworkApi()
+        public NetworkApi(IRequestMaker maker = null)
         {
-            HttpClient = new HttpClient();
-            HttpClient.BaseAddress = new Uri("https://192.168.1.30");
-
+            HttpClient = new HttpClient()
+            {
+                BaseAddress = new Uri("https://192.168.1.30")
+            };
             parser = new HtmlParser(new HtmlParserOptions() { IsStrictMode = false });
+            Maker = maker ?? new RequestMaker();
         }
 
-        IPageParserFactory ParserFactory { get; set; }
+        IRequestMaker Maker { get; set; }
 
-        IPageDescriptorFactory DescriptorFactory { get; set; }
+        public async Task<string> LoginAsync(string username, string password)
+        {
+            var data = new Dictionary<string, string>()
+            {
+                ["user"] = username,
+                ["passwd"] = password,
+            };
 
-        public Task<string> LoginAsync(string username, string password)
+            try
+            {
+                return await Maker.Make(requestUrl, data, PageType.Session);
+            }
+            catch (RequestFailedException ex)
+            {
+                Debug.WriteLine(ex);
+
+                // Find out exactly why the login failed for a more descriptive exception
+                switch (ex.Recieved)
+                {
+                    // The user has supplied an invalid username or password
+                    case PageType.AuthenticationFailed:
+                        throw new LoginFailedException(LoginFailReason.AuthenticationError);
+
+                    // The user is currently logged in on the same device
+                    case PageType.ConfirmAction:
+                        throw new LoginFailedException(LoginFailReason.UserAlreadyLoggedInOnSameIp);
+
+                    // The maximum number of allowed sessions for the user has been reached.
+                    // Note: this number is not currently know. Some say it is 2 per student and 5 per staff
+                    case PageType.MaxUserSessionsReached:
+                        throw new LoginFailedException(LoginFailReason.MaxUserSessionsReached);
+
+                    default:
+                        // Oh well...We can't seem to find out why the login failed
+                        throw new LoginFailedException(LoginFailReason.Unknown);
+                }
+            }
+            // This is probabbly the one from the network
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
+        }
+       
+        public Task<string> GetUsage(string sessionId)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task<Page> MakeRequest(Dictionary<string, string> data, CancellationToken cancelTtoken)
+        public Task Logout(string sessionId)
         {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
-            try
-            {
-                var responseMsg = await HttpClient.PostAsync(requestUrl, new FormUrlEncodedContent(data), cancelTtoken);
-                var response = await responseMsg.Content.ReadAsStringAsync();
-
-                var content = parser.Parse(response);
-
-                // Get descriptors for all page types except Unknown
-                foreach (var descriptor in  DescriptorFactory.GetAllDescriptors())
-                {
-                    if (descriptor.IsMatch(content))
-                    {
-                        var pageType = descriptor.For;
-                        return new Page(pageType, content);
-                    }
-                }
-
-                // This line may change in the future as i'm not sure whether to throw an exception or just 
-                // return a Page with PageType of Unknown
-                return new Page(PageType.Unknown, null);
-                return Page.Create(response);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Unable to complete login", ex);
-            }
+            throw new NotImplementedException();
         }
     }
 }

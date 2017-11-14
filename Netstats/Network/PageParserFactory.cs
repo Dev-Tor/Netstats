@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 
 namespace Netstats.Network
-{
-    public class PageParserFactory
+{ 
+    public class PageParserFactory : IPageParserFactory
     {
         static List<IPageParser> pageParserMap = new List<IPageParser>();
 
@@ -33,8 +33,6 @@ namespace Netstats.Network
             }
         }
 
-        public static IEnumerable<IPageParser> GetAllParsers() => pageParserMap;
-
-        public static IPageParser GetParserFor(PageType type) => pageParserMap.FirstOrDefault(x => x.For == type);
+        public  IPageParser GetParserFor(PageType type) => pageParserMap.FirstOrDefault(x => x.For == type);
     }
 }

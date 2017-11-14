@@ -11,22 +11,25 @@ namespace Netstats.Tests
 {
     public class DescriptorTests
     { 
-        [Theory]
+        [Theory(DisplayName = "IsMatch_WhenCalledWithValidContent_ReturnsTrue")]
         [InlineData(PageType.Session)]
         [InlineData(PageType.LoggedOut)]
         [InlineData(PageType.ConfirmAction)]
         [InlineData(PageType.AuthenticationFailed)]
-        [InlineData(PageType.BandwidthExceeded, Skip = "BandwidthExceeded mock file not available")]
-        [InlineData(PageType.MaxUserSessionsReached, Skip = "MaxUserSessionsReached mock file not available")]
+        //[InlineData(PageType.BandwidthExceeded, Skip = "BandwidthExceeded mock file not available")]
+        //[InlineData(PageType.MaxUserSessionsReached, Skip = "MaxUserSessionsReached mock file not available")]
         public void IsMatch_WhenCalledWithValidContent_ReturnsTrue(PageType type)
-        {
+        { 
+            IPageDescriptorFactory factory = new PageDescriptorFactory();
             var pageContent = DescriptorTestHelper.GetDummyPage(type);
-            var descriptor  = PageDescriptorFactory.GetDescriptorFor(type);
+            var descriptor  = factory.GetDescriptorFor(type);
 
-            Assert.True(descriptor.IsMatch(pageContent));
+            var expected = descriptor.IsMatch(pageContent);
+
+            Assert.True(expected);
         }
 
-        [Theory]
+        [Theory(DisplayName = "IsMatch_WhenCalledWithNull_ReturnsFalse")]
         [InlineData(PageType.Session)]
         [InlineData(PageType.LoggedOut)]
         [InlineData(PageType.ConfirmAction)]
@@ -35,9 +38,12 @@ namespace Netstats.Tests
         [InlineData(PageType.MaxUserSessionsReached)]
         public void IsMatch_WhenCalledWithNullContent_ReturnsFalse(PageType type)
         {
-            var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
+            IPageDescriptorFactory factory = new PageDescriptorFactory();
+            var descriptor = factory.GetDescriptorFor(type);
 
-            Assert.False(descriptor.IsMatch(null));
+            var expected = descriptor.IsMatch(null);
+
+            Assert.False(expected);
         }
     }
 }

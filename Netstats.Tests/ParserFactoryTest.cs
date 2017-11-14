@@ -25,7 +25,8 @@ namespace Netstats.Tests
         [InlineData(PageType.MaxUserSessionsReached)]
         public void GetParser_WhenCalledValidPageType_ReturnsAppropriateDescriptor(PageType type)
         {
-            var descriptor = PageDescriptorFactory.GetDescriptorFor(type);
+            var factory = new PageDescriptorFactory();
+            var descriptor = factory.GetDescriptorFor(type);
             var expectedType = descriptor.For;
 
             Assert.Equal(expectedType, type);
@@ -34,7 +35,9 @@ namespace Netstats.Tests
         [Fact]
         public void GetParser_WhenCalledWithUnknownPageType_ReturnsNull()
         {
-            Assert.Null(PageDescriptorFactory.GetDescriptorFor(PageType.Unknown));
+            var factory = new PageDescriptorFactory();
+            var expected = factory.GetDescriptorFor(PageType.Unknown);
+            Assert.Null(expected);
         }
     }
 }
