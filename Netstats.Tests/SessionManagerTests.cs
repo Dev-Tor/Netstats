@@ -14,15 +14,15 @@ namespace Netstats.Tests
 {
     public class SessionManagerTest
     {
-        [Fact]
-        public async Task Create_InvalidUsernameOrPassword_ThrowsArgumentExceptionAsync()
+        [Fact(DisplayName = "Create_InvalidUsernameOrPassword_ThrowsArgumentException")]
+        public async Task Create_InvalidUsernameOrPassword_ThrowsArgumentException()
         {
             // no need to mock network client as it's not needed
             SessionManager manager = new SessionManager(null);
             await Assert.ThrowsAsync<ArgumentException>(() => manager.Create(null, null));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Create_ValidUsernameAndPassoword_CreatesSession")]
         public async Task Create_ValidUsernameAndPassoword_CreatesSession()
         {
             var prebuiltJson = JsonConvert.SerializeObject(new LoginResult("qwerty", UserQuotaType.Monthly));
@@ -34,7 +34,7 @@ namespace Netstats.Tests
             Assert.NotNull(sessionManager.Current);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Create_ApiThrowsLoginFailedException_ThrowsLoginFailedException")]
         public async Task Create_ApiThrowsLoginFailedException_ThrowsLoginFailedException()
         {
             var mockClinet = Substitute.For<INetworkApi>();
@@ -45,7 +45,7 @@ namespace Netstats.Tests
             await Assert.ThrowsAsync<LoginFailedException>(() => sessionManager.Create("john", "smith"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "DestroyCurrent_WhenCalled_CallsLogoutInApi")]
         public async Task DestroyCurrent_WhenCalled_CallsLogoutInApi()
         {
             var mockClinet = Substitute.For<INetworkApi>();
@@ -62,7 +62,7 @@ namespace Netstats.Tests
             await mockClinet.Received().Logout("e4dd99ae701");
         }
 
-        [Fact]
+        [Fact(DisplayName = "DestroyCurrent_WhenCalled_CallsLogoutInApi")]
         public async Task DestroyCurrent_WhenCalled_CallsDisposeOnSession()
         {
             var mockClinet = Substitute.For<INetworkApi>();

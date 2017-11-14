@@ -16,7 +16,7 @@ namespace Netstats.Tests
         ///  is associated with
         /// </summary>
         /// <param name="type"> The page type</param>
-        [Theory]
+        [Theory(DisplayName = "GetParser_WhenCalledValidPageType_ReturnsAppropriateDescriptor")]
         [InlineData(PageType.Session)]
         [InlineData(PageType.LoggedOut)]
         [InlineData(PageType.ConfirmAction)]
@@ -32,7 +32,7 @@ namespace Netstats.Tests
             Assert.Equal(expectedType, type);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetParser_WhenCalledWithUnknownPageType_ReturnsNull")]
         public void GetParser_WhenCalledWithUnknownPageType_ReturnsNull()
         {
             var factory = new PageDescriptorFactory();
